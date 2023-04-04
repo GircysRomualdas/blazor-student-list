@@ -1,9 +1,36 @@
 ﻿@page "/students"
+@inject IStudentService StudentService
 
 <PageTitle>Students</PageTitle>
 
 <h3>Students</h3>
+<table>
+    <thead>
+        <tr>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Email</th>
+            <th>StudentGroup</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var student in StudentService.Students)
+        {
+            <tr>
+                <td>@student.FirstName</td>
+                <td>@student.LastName</td>
+                <td>@student.Email</td>
+                <td>@student.StudentGroup.Name</td>
+                <td>
+
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
 
 @code {
-
+    protected override async Task OnInitializedAsync() => await StudentService.GetStudents();
+    
 }
