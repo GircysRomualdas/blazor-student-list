@@ -1,4 +1,6 @@
+global using BlazorCrud.Shared;
 using Microsoft.AspNetCore.ResponseCompression;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
