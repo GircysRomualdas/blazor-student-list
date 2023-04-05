@@ -14,6 +14,6 @@ namespace BlazorCrud.Shared
         public string LastName { get; set; } = string.Empty;
         public string Email { get; set; } = string.Empty;
         public StudentGroup? StudentGroup { get; set; }
-        public int StudentId { get; set; }
+        public int StudentGroupId { get; set; }
     }
 }

@@ -13,12 +13,47 @@ else
     <h3>Edit @student.FirstName</h3>
 }
 
+<EditForm Model="student" OnSubmit="HandleSubmit">
+    <div>
+        <label for="firstname">First Name</label>
+        <InputText id="firstname" @bind-Value="student.FirstName" class="form-control"></InputText>
+    </div>
+    <div>
+        <label for="lastname">Last Name</label>
+        <InputText id="lastname" @bind-Value="student.LastName" class="form-control"></InputText>
+    </div>
+    <div>
+        <label for="email">Email</label>
+        <InputText id="email" @bind-Value="student.Email" class="form-control"></InputText>
+    </div>
+    <div>
+        <label>Student Group</label><br />
+        <InputSelect @bind-Value="student.StudentGroupId" class="form-select">
+            @foreach (var group in StudentService.StudentGroups)
+            {
+                <option value="@group.Id">@group.Name</option>
+            }
+        </InputSelect>
+    </div>
+    <br />
+    <button type="submit" class="btn btn-primary">
+        @btnText
+    </button>
+</EditForm>
 
 @code {
     [Parameter]
     public int? Id { get; set; }
 
+    string btnText = string.Empty;
+
     Student student = new Student { StudentGroup = new StudentGroup() };
+
+    protected override async Task OnInitializedAsync()
+    {
+        btnText = Id == null ? "Save " : "Update";
+        await StudentService.GetStudentGroups();
+    }
 
     protected override async Task OnParametersSetAsync()
     {
@@ -30,5 +65,10 @@ else
         {
             student = await StudentService.GetSingleStudet((int)Id);
         }
+    }
+
+    async Task HandleSubmit()
+    {
+        
     }
 }

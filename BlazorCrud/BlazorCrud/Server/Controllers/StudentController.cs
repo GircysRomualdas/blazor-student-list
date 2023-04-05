@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using BlazorCrud.Shared;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BlazorCrud.Server.Controllers
@@ -14,26 +15,29 @@ namespace BlazorCrud.Server.Controllers
         };
 
         public static List<Student> students = new List<Student> {
-            new Student { 
-                Id = 1, 
-                FirstName = "Romas", 
-                LastName = "Gircys", 
+            new Student {
+                Id = 1,
+                FirstName = "Romas",
+                LastName = "Gircys",
                 Email = "romas@gmail.com",
-                StudentGroup = studentGroups[0]
+                StudentGroup = studentGroups[0],
+                StudentGroupId = 1
             },
             new Student {
                 Id = 2,
                 FirstName = "Vaidas",
                 LastName = "Katin",
                 Email = "vaidas@gmail.com",
-                StudentGroup = studentGroups[1]
-            },
+                StudentGroup = studentGroups[1],
+                StudentGroupId = 2
+},
             new Student {
                 Id = 3,
                 FirstName = "Rudis",
                 LastName = "Ackas",
                 Email = "rudis@gmail.com",
-                StudentGroup = studentGroups[2]
+                StudentGroup = studentGroups[2],
+                StudentGroupId = 3
             }
         };
 
@@ -41,6 +45,12 @@ namespace BlazorCrud.Server.Controllers
         public async Task<ActionResult<List<Student>>> GetStudents()
         {
             return Ok(students);
+        }
+
+        [HttpGet("studentgroups")]
+        public async Task<ActionResult<List<StudentGroup>>> GetStudentGroups()
+        {
+            return Ok(studentGroups);
         }
 
         [HttpGet("{id}")]

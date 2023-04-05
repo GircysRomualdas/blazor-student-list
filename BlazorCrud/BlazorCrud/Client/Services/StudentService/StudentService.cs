@@ -26,9 +26,11 @@ namespace BlazorCrud.Client.Services.StudentService
             throw new Exception("Not Found");
         }
 
-        public Task GetStudentGroups()
+        public async Task GetStudentGroups()
         {
-            throw new NotImplementedException();
+            var result = await this.http.GetFromJsonAsync<List<StudentGroup>>("api/student/studentgroups");
+            if (result != null)
+                StudentGroups = result;
         }
 
         public async Task GetStudents()
