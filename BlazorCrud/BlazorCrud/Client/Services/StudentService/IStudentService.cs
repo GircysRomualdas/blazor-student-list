@@ -8,6 +8,9 @@
         Task GetStudents();
         Task GetStudentGroups();
         Task<Student> GetSingleStudet(int id);
+        Task CreateStudent(Student student);
+        Task UpdateStudent(Student student);
+        Task DeleteStudent(int id);
 
     }
 }

@@ -32,6 +32,7 @@
         }
     </tbody>
 </table>
+<button class="btn btn-primary" @onclick="CreateNewStudent">Create student</button>
 
 @code {
     protected override async Task OnInitializedAsync() => await StudentService.GetStudents();
@@ -39,5 +40,10 @@
     void ShowSingleStudent(int id)
     {
         NavigationManager.NavigateTo($"singlestudent/{id}");
+    }
+
+    void CreateNewStudent()
+    {
+        NavigationManager.NavigateTo($"singlestudent");
     }
 }

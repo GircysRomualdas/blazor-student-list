@@ -36,9 +36,8 @@ else
         </InputSelect>
     </div>
     <br />
-    <button type="submit" class="btn btn-primary">
-        @btnText
-    </button>
+    <button type="submit" class="btn btn-primary">@btnText</button>
+    <button type="button" class="btn btn-danger" @onclick="DeleteStudent">Delete student</button>
 </EditForm>
 
 @code {
@@ -59,7 +58,8 @@ else
     {
         if (Id == null)
         {
-
+            student.StudentGroup = StudentService.StudentGroups[0];
+            student.StudentGroupId = student.StudentGroup.Id;
         }
         else
         {
@@ -69,6 +69,18 @@ else
 
     async Task HandleSubmit()
     {
-        
+        if(Id == null)
+        {
+            await StudentService.CreateStudent(student);
+        }
+        else
+        {
+            await StudentService.UpdateStudent(student);
+        }
+    }
+
+    async Task DeleteStudent()
+    {
+        await StudentService.DeleteStudent(student.Id);
     }
 }
